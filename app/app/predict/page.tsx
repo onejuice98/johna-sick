@@ -31,10 +31,15 @@ const Page = () => {
     <div>
       이건 프레딕트
       <form onSubmit={handleSubmit}>
-        <input type="text" required onChange={handleChange} value={comment} />
+        <input
+          type="text"
+          required
+          onChange={handleChange}
+          value={comment}
+          placeholder="댓글을 입력하세요."
+        />
         <button type="submit"> 제출</button>
       </form>
-      <button> censor </button>
       <div>
         {comments.map((value, index) => (
           <div key={index}>
