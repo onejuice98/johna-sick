@@ -1,7 +1,22 @@
 "use client";
 import { getPredict } from "@/pages/api/predict/result";
 import React, { useState } from "react";
+import styled from "styled-components";
 
+const CommentForm = styled.form`
+  display: flex;
+  gap: 0.5rem;
+`;
+const CommentInput = styled.input`
+  padding: 1rem;
+  border: 1px solid black;
+  border-radius: 0.25rem;
+`;
+const CommentButton = styled.button`
+  padding: 1rem;
+  border: none;
+  border-radius: 0.25rem;
+`;
 const CENSOR_MESSAGE = "^^ld가 작동하였습니다.";
 type censorListType = {
   comment: string;
@@ -30,16 +45,16 @@ const Page = () => {
   return (
     <div>
       이건 프레딕트
-      <form onSubmit={handleSubmit}>
-        <input
+      <CommentForm onSubmit={handleSubmit}>
+        <CommentInput
           type="text"
           required
           onChange={handleChange}
           value={comment}
           placeholder="댓글을 입력하세요."
         />
-        <button type="submit"> 제출</button>
-      </form>
+        <CommentButton type="submit"> 제출</CommentButton>
+      </CommentForm>
       <div>
         {comments.map((value, index) => (
           <div key={index}>
