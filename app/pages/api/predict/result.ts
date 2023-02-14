@@ -1,5 +1,4 @@
-"use client";
-const prepareComment = (comment: string) => {
+export const prepareComment = (comment: string) => {
   return comment.replace(/\?/g, "%3F").replace(/\//g, "").replace(/\%/g, "%25");
 };
 export const getPredict = async (comment: string) => {

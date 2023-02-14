@@ -1,36 +1,49 @@
 "use client";
 import { getPredict } from "@/pages/api/predict/result";
-import { use, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import React, { useState } from "react";
 
-type hookFormType = {
+const CENSOR_MESSAGE = "^^ld가 작동하였습니다.";
+type censorListType = {
   comment: string;
+  censor: boolean;
 };
-const page = () => {
-  const [comments, setComments] = useState<hookFormType[]>([]);
-  const { register, handleSubmit, reset } = useForm<hookFormType>();
-  const onValid = (data: hookFormType) => {
-    setComments([...comments, data]);
-    reset();
+const Page = () => {
+  const [comment, setComment] = useState<string>("");
+  const [comments, setComments] = useState<censorListType[]>([]);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setComment(event.currentTarget.value);
   };
-  const onCensor = () => {
-    console.log(getPredict("개쌔끼들아"));
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const tempPredict = await getPredict(comment);
+    setComments([
+      ...comments,
+      {
+        comment: comment,
+        censor: parseInt(tempPredict.predict) < -60 ? true : false,
+      },
+    ]);
+    setComment("");
   };
+
   return (
     <div>
       이건 프레딕트
-      <form onSubmit={handleSubmit(onValid)}>
-        <input {...register("comment")} type="text" required />
+      <form onSubmit={handleSubmit}>
+        <input type="text" required onChange={handleChange} value={comment} />
         <button type="submit"> 제출</button>
       </form>
-      <button onClick={onCensor}> censor </button>
+      <button> censor </button>
       <div>
-        {comments.map((value) => (
-          <div key={value.comment}>{value.comment}</div>
+        {comments.map((value, index) => (
+          <div key={index}>
+            {value.comment} / {value.censor && "censored"}
+          </div>
         ))}
       </div>
     </div>
   );
 };
 
-export default page;
+export default Page;
