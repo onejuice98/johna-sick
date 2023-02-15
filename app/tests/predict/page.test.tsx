@@ -1,18 +1,21 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 import Page from "@/app/predict/page";
 
 describe("predict <Page />", () => {
   const setup = () => {
-    const utils = render(<Page />);
-    const title = screen.getByText("이건 프레딕트");
-    const input = screen.getByPlaceholderText("댓글을 입력하세요.");
-    const button = screen.getByText("제출");
+    const { getByText, getByPlaceholderText, findByText } = render(<Page />);
+    const title = getByText("이건 프레딕트");
+    const input = getByPlaceholderText("댓글 추가...");
+    const button = getByText("제출");
+    const MOCK_COMMENT = "테스트용댓글";
 
     return {
-      ...utils,
       title,
       input,
       button,
+      MOCK_COMMENT,
+      getByText,
+      findByText,
     };
   };
   it("Predict render test", () => {
@@ -23,14 +26,14 @@ describe("predict <Page />", () => {
     expect(button).toBeInTheDocument();
   }),
     it("changes input", () => {
-      const { input } = setup();
+      const { input, MOCK_COMMENT } = setup();
 
       fireEvent.change(input, {
         target: {
-          value: "댓글입력테스트",
+          value: MOCK_COMMENT,
         },
       });
 
-      expect(input).toHaveAttribute("value", "댓글입력테스트");
+      expect(input).toHaveAttribute("value", MOCK_COMMENT);
     });
 });

@@ -1,3 +1,4 @@
+import "@/app/styles/global.css";
 export default function RootLayout({
   children,
 }: {
@@ -8,6 +9,7 @@ export default function RootLayout({
       <head>
         <title> Next.js 13 </title>
       </head>
+
       <body>
         <header> header </header>
         <div>{children}</div>
