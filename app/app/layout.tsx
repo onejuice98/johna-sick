@@ -8,6 +8,10 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <title> Next.js 13 </title>
+        <script
+          src="https://kit.fontawesome.com/72c5ecbf7c.js"
+          crossOrigin="anonymous"
+        ></script>
       </head>
 
       <body>
