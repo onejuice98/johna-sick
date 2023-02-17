@@ -1,5 +1,6 @@
 "use client";
-import Wrapper, { WrapperStyle } from "@/components/FlexWrapper";
+import Wrapper, { WrapperStyle } from "@/components/common/FlexWrapper";
+import Texts from "@/components/common/Texts";
 import { getPredict } from "@/pages/api/predict/result";
 import React, { useState } from "react";
 import styled from "styled-components";
@@ -11,25 +12,6 @@ const VideoOptions = styled(WrapperStyle)`
   border-top: 4px solid #fff;
 `;
 
-const InfoTitle = styled.span`
-  font-size: x-large;
-  font-weight: bold;
-`;
-
-const InfoWriter = styled.span`
-  font-size: large;
-  font-weight: bold;
-`;
-const InfoWriterSubscribe = styled.span`
-  font-size: small;
-  font-weight: 300;
-  color: gray;
-`;
-
-const VideoInfoViewer = styled.span`
-  font-size: small;
-  font-weight: bold;
-`;
 const VideoInfoParagraph = styled.p`
   font-size: small;
   line-height: 1rem;
@@ -45,10 +27,6 @@ const VisibleButton = styled.button`
     background-color: #a8a3a310;
     transition-duration: 500ms;
   }
-`;
-const CommentCount = styled.span`
-  font-weight: bold;
-  margin-right: 20px;
 `;
 const Avatar = styled.div`
   border-radius: 100%;
@@ -69,10 +47,6 @@ const CommentInput = styled.input`
   &:focus {
     outline: none;
   }
-`;
-const CommentWriter = styled.span`
-  font-size: small;
-  font-weight: bold;
 `;
 const CommentText = styled.p`
   font-size: small;
@@ -199,13 +173,19 @@ const Page = () => {
         </VideoOptions>
       </Wrapper>
       <Wrapper direction="column" mt={10}>
-        <InfoTitle>Language-Purifier 를 소개합니다!</InfoTitle>
+        <Texts fontSize="x-large" weight="bold">
+          Language-Purifier 를 소개합니다!
+        </Texts>
         <Wrapper justifyContent="space-between" mt={10}>
           <Wrapper gap={1}>
             <Avatar />
             <Wrapper direction="column" gap={0.25}>
-              <InfoWriter>One Juice</InfoWriter>
-              <InfoWriterSubscribe>구독자 5명</InfoWriterSubscribe>
+              <Texts fontSize="large" weight="bold">
+                One Juice
+              </Texts>
+              <Texts fontSize="small" weight={300} color="gray">
+                구독자 5명
+              </Texts>
             </Wrapper>
           </Wrapper>
           <Wrapper gap={0.5}>
@@ -320,7 +300,9 @@ const Page = () => {
           py={12}
           bgGray
         >
-          <VideoInfoViewer>조회수 12회</VideoInfoViewer>
+          <Texts fontSize="small" weight="bold">
+            조회수 12회
+          </Texts>
           <VideoInfoParagraph>
             안녕하세요 🙌 <br />
             Language-Purifier 제작자 OneJuice입니다. <br />
@@ -332,7 +314,9 @@ const Page = () => {
       <hr />
       <Wrapper direction="column" gap={1}>
         <div>
-          <CommentCount> 댓글 {comments.length}개</CommentCount>
+          <Texts weight="bold" mr={20}>
+            댓글 {comments.length}개
+          </Texts>
           <VisibleButton onClick={() => setVisible((prev) => !prev)}>
             {visible ? "나쁜 댓글 보기" : "나쁜 댓글 숨기기"}
           </VisibleButton>
@@ -352,7 +336,9 @@ const Page = () => {
             <Wrapper key={index} gap={1} mb={32}>
               <Avatar />
               <Wrapper direction="column" width="90%">
-                <CommentWriter>One Juice</CommentWriter>
+                <Texts fontSize="small" weight="bold">
+                  One Juice
+                </Texts>
                 <CommentText>
                   {visible && value.censor ? CENSOR_MESSAGE : value.comment}
                 </CommentText>
@@ -403,7 +389,7 @@ const Page = () => {
                       ></path>
                     </g>
                   </svg>
-                  <span> 답글 </span>
+                  <Texts fontSize="small"> 답글 </Texts>
                 </Wrapper>
               </Wrapper>
             </Wrapper>
