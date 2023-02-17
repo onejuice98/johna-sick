@@ -37,6 +37,23 @@ export const WrapperStyle = styled.div<WrapperStyleType>`
   margin-bottom: ${(props) => props.mb + "px"};
 `;
 
+/**
+ * Flex Box 로 주로 Container로 이용된다.
+ * @param children React.ReactNode
+ * @param direction flex-direction 설정
+ * @param justifyContent Main-Axis 설정
+ * @param alignItems Cross-Axis 설정
+ * @param bgGray 배경 gray 설정
+ * @param width Wrapper Width 설정
+ * @param height Wrapper Height 설정
+ * @param borderRadius border-radius 설정 (px)
+ * @param px padding-left, right 설정 (px)
+ * @param py padding-top, bottom 설정 (px)
+ * @param gap gap 설정 (rem)
+ * @param mt margin-top 설정 (mt)
+ * @param mb margin-bottom 설정 (mb)
+ * @returns Wrapper (Container) <HTMLDivElement>
+ */
 const Wrapper = ({
   children,
   direction,

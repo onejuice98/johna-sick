@@ -4,33 +4,24 @@ interface TextStyleType {
   fontSize?: "x-large" | "large" | "small";
   color?: "gray";
   weight?: "bold" | 300;
-  lineHeight?: number; //rem
   mr?: number; // px
   children?: React.ReactNode;
 }
+/**
+ * @param fontSize font-size 조절(글자크기)
+ * @param color font-color 설정
+ * @param weight font 굵기 설정
+ * @param mr margin-right 설정 (mr)
+ */
 const TextStyle = styled.span<TextStyleType>`
   font-size: ${(props) => props.fontSize};
   font-weight: ${(props) => props.color};
   color: ${(props) => props.color};
-  line-height: ${(props) => props.lineHeight + "rem"};
   margin-right: ${(props) => props.mr + "px"};
 `;
-const Texts = ({
-  children,
-  fontSize,
-  color,
-  weight,
-  lineHeight,
-  mr,
-}: TextStyleType) => {
+const Texts = ({ children, fontSize, color, weight, mr }: TextStyleType) => {
   return (
-    <TextStyle
-      fontSize={fontSize}
-      color={color}
-      weight={weight}
-      lineHeight={lineHeight}
-      mr={mr}
-    >
+    <TextStyle fontSize={fontSize} color={color} weight={weight} mr={mr}>
       {children}
     </TextStyle>
   );
