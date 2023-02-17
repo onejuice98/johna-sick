@@ -1,4 +1,5 @@
 "use client";
+import Wrapper, { WrapperStyle } from "@/components/FlexWrapper";
 import { getPredict } from "@/pages/api/predict/result";
 import React, { useState } from "react";
 import styled from "styled-components";
@@ -6,50 +7,15 @@ import styled from "styled-components";
 const PredictWrapper = styled.div`
   padding: 20px;
 `;
-const VideoWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  width: 100%;
-  height: 240px;
-  background-color: #80808035;
-  padding: 0px 10px 0px 10px;
-`;
-const VideoOptions = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 40px;
+const VideoOptions = styled(WrapperStyle)`
   border-top: 4px solid #fff;
 `;
-const OptionsWrapper = styled.div`
-  display: flex;
-  gap: 0.5rem;
-`;
-const InfoWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
-`;
+
 const InfoTitle = styled.span`
   font-size: x-large;
   font-weight: bold;
 `;
-const InfoWriterWrapper = styled.div`
-  display: flex;
-  margin-top: 10px;
-  justify-content: space-between;
-`;
-const InfoWriterInfo = styled.div`
-  display: flex;
-  gap: 1rem;
-`;
-const InfoWriterInfoWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-`;
+
 const InfoWriter = styled.span`
   font-size: large;
   font-weight: bold;
@@ -59,19 +25,7 @@ const InfoWriterSubscribe = styled.span`
   font-weight: 300;
   color: gray;
 `;
-const InfoWriterOptions = styled.div`
-  display: flex;
-  gap: 0.5rem;
-`;
-const VideoInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: #a5a5a551;
-  margin-top: 10px;
-  border-radius: 10px;
-  padding: 12px 8px 12px 8px;
-  gap: 0.5rem;
-`;
+
 const VideoInfoViewer = styled.span`
   font-size: small;
   font-weight: bold;
@@ -91,11 +45,6 @@ const VisibleButton = styled.button`
     background-color: #a8a3a310;
     transition-duration: 500ms;
   }
-`;
-const CommentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
 `;
 const CommentCount = styled.span`
   font-weight: bold;
@@ -121,21 +70,6 @@ const CommentInput = styled.input`
     outline: none;
   }
 `;
-const CommentList = styled.div`
-  width: 100%;
-`;
-const Comment = styled.div`
-  display: flex;
-  position: relative;
-  width: 100%;
-  margin-bottom: 2rem;
-  gap: 1rem;
-`;
-const CommentContext = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 90%;
-`;
 const CommentWriter = styled.span`
   font-size: small;
   font-weight: bold;
@@ -144,13 +78,7 @@ const CommentText = styled.p`
   font-size: small;
   margin-top: 12px;
 `;
-const CommentOptions = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: small;
-  margin-top: 6px;
-`;
+
 const CENSOR_MESSAGE = "^^ld가 작동하였습니다.";
 type censorListType = {
   comment: string;
@@ -179,9 +107,21 @@ const Page = () => {
 
   return (
     <PredictWrapper>
-      <VideoWrapper>
-        <VideoOptions>
-          <OptionsWrapper>
+      <Wrapper
+        direction="column"
+        justifyContent="flex-end"
+        width="100%"
+        height={360}
+        bgGray
+        px={10}
+      >
+        <VideoOptions
+          justifyContent="space-between"
+          alignItems="center"
+          width="100%"
+          height={40}
+        >
+          <Wrapper gap={0.5}>
             <svg
               width={30}
               height={30}
@@ -239,7 +179,7 @@ const Page = () => {
                 stroke-linejoin="round"
               />
             </svg>
-          </OptionsWrapper>
+          </Wrapper>
 
           <svg
             width={30}
@@ -257,18 +197,18 @@ const Page = () => {
             />
           </svg>
         </VideoOptions>
-      </VideoWrapper>
-      <InfoWrapper>
+      </Wrapper>
+      <Wrapper direction="column" mt={10}>
         <InfoTitle>Language-Purifier 를 소개합니다!</InfoTitle>
-        <InfoWriterWrapper>
-          <InfoWriterInfo>
+        <Wrapper justifyContent="space-between" mt={10}>
+          <Wrapper gap={1}>
             <Avatar />
-            <InfoWriterInfoWrapper>
+            <Wrapper direction="column" gap={0.25}>
               <InfoWriter>One Juice</InfoWriter>
               <InfoWriterSubscribe>구독자 5명</InfoWriterSubscribe>
-            </InfoWriterInfoWrapper>
-          </InfoWriterInfo>
-          <InfoWriterOptions>
+            </Wrapper>
+          </Wrapper>
+          <Wrapper gap={0.5}>
             <svg
               width={30}
               height={30}
@@ -369,9 +309,17 @@ const Page = () => {
                 ></path>
               </g>
             </svg>
-          </InfoWriterOptions>
-        </InfoWriterWrapper>
-        <VideoInfo>
+          </Wrapper>
+        </Wrapper>
+        <Wrapper
+          direction="column"
+          mt={10}
+          gap={0.5}
+          borderRadius={10}
+          px={8}
+          py={12}
+          bgGray
+        >
           <VideoInfoViewer>조회수 12회</VideoInfoViewer>
           <VideoInfoParagraph>
             안녕하세요 🙌 <br />
@@ -379,10 +327,10 @@ const Page = () => {
             많이 부족한 프로그램이고, 완벽하진 않지만 욕은 확실하게 거른다구요!
             많이 사용해주세요!
           </VideoInfoParagraph>
-        </VideoInfo>
-      </InfoWrapper>
+        </Wrapper>
+      </Wrapper>
       <hr />
-      <CommentWrapper>
+      <Wrapper direction="column" gap={1}>
         <div>
           <CommentCount> 댓글 {comments.length}개</CommentCount>
           <VisibleButton onClick={() => setVisible((prev) => !prev)}>
@@ -399,16 +347,16 @@ const Page = () => {
             placeholder="댓글 추가..."
           />
         </CommentForm>
-        <CommentList>
+        <div>
           {comments.map((value, index) => (
-            <Comment key={index}>
+            <Wrapper key={index} gap={1} mb={32}>
               <Avatar />
-              <CommentContext>
+              <Wrapper direction="column" width="90%">
                 <CommentWriter>One Juice</CommentWriter>
                 <CommentText>
                   {visible && value.censor ? CENSOR_MESSAGE : value.comment}
                 </CommentText>
-                <CommentOptions>
+                <Wrapper alignItems="center" gap={0.5} mt={6}>
                   <svg
                     width={20}
                     height={20}
@@ -456,12 +404,12 @@ const Page = () => {
                     </g>
                   </svg>
                   <span> 답글 </span>
-                </CommentOptions>
-              </CommentContext>
-            </Comment>
+                </Wrapper>
+              </Wrapper>
+            </Wrapper>
           ))}
-        </CommentList>
-      </CommentWrapper>
+        </div>
+      </Wrapper>
     </PredictWrapper>
   );
 };
