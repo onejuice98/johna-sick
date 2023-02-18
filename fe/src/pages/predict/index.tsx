@@ -42,16 +42,27 @@ const Avatar = styled.div`
 `;
 const CommentForm = styled.form`
   display: flex;
-  align-items: flex-start;
-  gap: 1rem;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  width: 90%;
 `;
 const CommentInput = styled.input`
   border: none;
   border-bottom: 1px solid gray;
   padding-bottom: 4px;
-  width: 90%;
+  width: 100%;
   &:focus {
     outline: none;
+  }
+`;
+const SubmitButton = styled.button`
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  &:hover {
+    background-color: #cecdcd;
+    transition-duration: 500ms;
   }
 `;
 const CommentText = styled.p`
@@ -64,7 +75,7 @@ type censorListType = {
   comment: string;
   censor: boolean;
 };
-const Page = () => {
+const Predict = () => {
   const [comment, setComment] = useState<string>("");
   const [comments, setComments] = useState<censorListType[]>([]);
   const [visible, setVisible] = useState<boolean>(true);
@@ -161,16 +172,20 @@ const Page = () => {
             {visible ? "나쁜 댓글 보기" : "나쁜 댓글 숨기기"}
           </VisibleButton>
         </div>
-        <CommentForm onSubmit={handleSubmit}>
+        <Wrapper direction="row" gap={1}>
           <Avatar />
-          <CommentInput
-            type="text"
-            required
-            onChange={handleChange}
-            value={comment}
-            placeholder="댓글 추가..."
-          />
-        </CommentForm>
+          <CommentForm onSubmit={handleSubmit}>
+            <CommentInput
+              type="text"
+              required
+              onChange={handleChange}
+              value={comment}
+              placeholder="댓글 추가..."
+            />
+            <SubmitButton type="submit"> 작성 </SubmitButton>
+          </CommentForm>
+        </Wrapper>
+
         <div>
           {comments.map((value, index) => (
             <Wrapper key={index} gap={1} mb={32}>
@@ -196,4 +211,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default Predict;
