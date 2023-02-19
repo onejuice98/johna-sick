@@ -20,7 +20,8 @@ const renderPredictPage = () => {
   const BadDisplayButton = () => result.getByText("나쁜 댓글 보기");
   const GoodDisplayButton = () => result.queryByText("나쁜 댓글 숨기기");
   const CommentInput = () => result.getByPlaceholderText("댓글 추가...");
-  const CommentSubmit = () => result.getByText("제출");
+  const CommentSubmit = () => result.getByText("작성");
+  const CommentTest = () => result.queryByText(MOCK_COMMENT);
 
   /* DOM 요소와 상호작용을 담당 */
   const clickBadDisplayButton = async () => {
@@ -37,7 +38,7 @@ const renderPredictPage = () => {
     });
   };
 
-  const clickCommentSubmit = async () => {
+  const clickCommentSubmit = () => {
     fireEvent.click(CommentSubmit());
   };
 
@@ -55,6 +56,7 @@ const renderPredictPage = () => {
     clickBadDisplayButton,
     changeCommentInput,
     clickCommentSubmit,
+    CommentTest,
   };
 };
 describe("Predict Page", () => {
@@ -68,6 +70,7 @@ describe("Predict Page", () => {
       BadDisplayButton,
       GoodDisplayButton,
       CommentInput,
+      CommentSubmit,
     } = renderPredictPage();
 
     expect(VideoTitle()).toBeInTheDocument();
@@ -78,6 +81,7 @@ describe("Predict Page", () => {
     expect(BadDisplayButton()).toBeInTheDocument();
     expect(GoodDisplayButton()).not.toBeInTheDocument();
     expect(CommentInput()).toBeInTheDocument();
+    expect(CommentSubmit()).toBeInTheDocument();
   }),
     it("나쁜 댓글 보기 토글 버튼 클릭 테스트", async () => {
       const { GoodDisplayButton, clickBadDisplayButton } = renderPredictPage();
@@ -89,11 +93,21 @@ describe("Predict Page", () => {
       expect(GoodDisplayButton()).toBeInTheDocument();
     }),
     it("댓글 입력 테스트", async () => {
-      const { CommentInput, changeCommentInput, MOCK_COMMENT } =
-        renderPredictPage();
+      const {
+        CommentInput,
+        changeCommentInput,
+        MOCK_COMMENT,
+        clickCommentSubmit,
+        CommentTest,
+      } = renderPredictPage();
 
       changeCommentInput();
 
       expect(CommentInput()).toHaveAttribute("value", MOCK_COMMENT);
+
+      clickCommentSubmit();
+
+      expect(CommentInput()).toHaveAttribute("value", "");
+      //expect(CommentTest()).toBeInTheDocument();
     });
 });

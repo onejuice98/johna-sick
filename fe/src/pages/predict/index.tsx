@@ -1,5 +1,6 @@
 import Wrapper, { WrapperStyle } from "@/components/common/FlexWrapper";
 import Texts from "@/components/common/Texts";
+import CommentInput from "@/components/predict/svgs/CommentInput";
 import DisLike from "@/components/predict/svgs/DisLike";
 import Display from "@/components/predict/svgs/Display";
 import Like from "@/components/predict/svgs/Like";
@@ -34,37 +35,13 @@ const VisibleButton = styled.button`
     transition-duration: 500ms;
   }
 `;
-const Avatar = styled.div`
+export const Avatar = styled.div`
   border-radius: 100%;
   width: 40px;
   height: 40px;
   background-color: gray;
 `;
-const CommentForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.5rem;
-  width: 90%;
-`;
-const CommentInput = styled.input`
-  border: none;
-  border-bottom: 1px solid gray;
-  padding-bottom: 4px;
-  width: 100%;
-  &:focus {
-    outline: none;
-  }
-`;
-const SubmitButton = styled.button`
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
-  &:hover {
-    background-color: #cecdcd;
-    transition-duration: 500ms;
-  }
-`;
+
 const CommentText = styled.p`
   font-size: small;
   margin-top: 12px;
@@ -82,17 +59,18 @@ const Predict = () => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setComment(event.currentTarget.value);
   };
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const tempPredict = await getPredict(comment);
+  const asyncTest = async (value: string) => {
     setComments([
       ...comments,
       {
-        comment: comment,
-        censor: parseInt(tempPredict.predict) < -60 ? true : false,
+        comment: value,
+        censor: (await getPredict(value)) < -60 ? true : false,
       },
     ]);
+  };
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    asyncTest(comment);
     setComment("");
   };
 
@@ -172,19 +150,11 @@ const Predict = () => {
             {visible ? "나쁜 댓글 보기" : "나쁜 댓글 숨기기"}
           </VisibleButton>
         </div>
-        <Wrapper direction="row" gap={1}>
-          <Avatar />
-          <CommentForm onSubmit={handleSubmit}>
-            <CommentInput
-              type="text"
-              required
-              onChange={handleChange}
-              value={comment}
-              placeholder="댓글 추가..."
-            />
-            <SubmitButton type="submit"> 작성 </SubmitButton>
-          </CommentForm>
-        </Wrapper>
+        <CommentInput
+          submit={handleSubmit}
+          change={handleChange}
+          value={comment}
+        />
 
         <div>
           {comments.map((value, index) => (
