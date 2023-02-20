@@ -9,6 +9,6 @@ export const getPredict = async (comment: string) => {
   const res = await axios.get(
     `http://localhost:3000/api/predict/${prepareComment(comment)}`
   );
-
-  return parseInt(res.data.predict);
+  const data = res.data;
+  return parseInt(data.predict);
 };

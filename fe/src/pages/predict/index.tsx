@@ -10,8 +10,10 @@ import Share from "@/components/predict/svgs/Share";
 import ThreeDot from "@/components/predict/svgs/ThreeDot";
 import Volume from "@/components/predict/svgs/Volume";
 import { getPredict } from "@/pages/api/predict/result";
-import React, { useState } from "react";
+import { truncateSync } from "fs";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { convertToObject } from "typescript";
 
 const PredictWrapper = styled.div`
   padding: 20px;
@@ -59,18 +61,16 @@ const Predict = () => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setComment(event.currentTarget.value);
   };
-  const asyncTest = async (value: string) => {
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setComments([
       ...comments,
       {
-        comment: value,
-        censor: (await getPredict(value)) < -60 ? true : false,
+        comment: comment,
+        censor: (await getPredict(comment)) < -60 ? true : false,
       },
     ]);
-  };
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    asyncTest(comment);
     setComment("");
   };
 
