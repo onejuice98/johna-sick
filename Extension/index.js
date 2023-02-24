@@ -2,19 +2,28 @@ const prepareComment = (comment) => {
   return comment.replace(/\?/g, "%3F").replace(/\//g, "").replace(/\%/g, "%25");
 };
 
-let head = document.querySelector("head");
-let meta = document.createElement("meta");
-meta.setAttribute("http-equiv", "Content-Security-Policy");
-meta.setAttribute("content", "upgrade-insecure-requests");
-//head.appendChild(meta);
-setInterval(() => {
-  let comment = document.querySelectorAll("#content-text");
-  comment.forEach(async (value) => {
-    value.setAttribute("id", "censored_content-text");
-    value.innerHTML = "뭘봐요";
+setTimeout(() => {
+  setInterval(() => {
+    let comment = document.querySelectorAll("#content-text");
+    comment.forEach(async (value) => {
+      value.setAttribute("id", "censored_content-text");
+      let commentValue = "";
 
-    fetch(`http://43.201.146.63:5000/predict/${prepareComment("시발")}`)
-      .then((res) => res.json())
-      .then((data) => console.log(data));
-  });
-}, 1000);
+      value.querySelectorAll(".style-scope.yt-formatted-string").length !== 0
+        ? value
+            .querySelectorAll(".style-scope.yt-formatted-string")
+            .forEach((moreTagValue) => (commentValue += moreTagValue.innerHTML))
+        : (commentValue += value.innerHTML);
+      console.log(commentValue);
+      fetch(`http://43.201.146.63:5000/predict/${prepareComment(commentValue)}`)
+        .then((res) => res.json())
+        .then(
+          (data) =>
+            (value.innerHTML =
+              parseInt(data.predict) < -60
+                ? "랭푸파가 작동되었습니다."
+                : commentValue)
+        );
+    });
+  }, 1000);
+}, 2000);
