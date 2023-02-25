@@ -1,11 +1,11 @@
 {
-  "name": "NGMsoftware",
-  "description": "NGMsoftware chrome extensions.",
-  "version": "1.0",
+  "name": "LngPuFi",
+  "description": "랭푸파는 욕설 필터링이 있습니다. 혐오표현, 욕설 다 가능합니다.",
+  "version": "0.0.1",
   "manifest_version": 3,
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
+      "matches": ["https://www.youtube.com/*"],
       "js": ["index.js"]
     }
   ],
