@@ -1,5 +1,5 @@
 import Wrapper from "@/components/common/FlexWrapper";
-import { Avatar } from "@/pages/predict";
+import NoAvatar from "@/components/predict/svgs/NoAvatar";
 import styled from "styled-components";
 
 const CForm = styled.form`
@@ -35,7 +35,7 @@ interface CommentInputType {
 const CommentInput = ({ submit, change, value = "" }: CommentInputType) => {
   return (
     <Wrapper direction="row" gap={1}>
-      <Avatar />
+      <NoAvatar w={40} h={40} />
       <CForm onSubmit={submit}>
         <CInput
           type="text"

@@ -3,11 +3,11 @@ import styled from "styled-components";
 
 interface WrapperStyleType {
   direction?: "row" | "column";
-  justifyContent?: "space-between" | "flex-end";
+  justifyContent?: "space-between" | "flex-end" | "center";
   alignItems?: "center";
   bgGray?: boolean;
-  width?: "100%" | "90%";
-  height?: number; // px
+  width?: "100%" | "90%" | "100vw" | "90vw";
+  height?: "100vh" | number; // px
   borderRadius?: number; // px
   px?: number; // px
   py?: number; // py
@@ -24,7 +24,8 @@ export const WrapperStyle = styled.div<WrapperStyleType>`
   align-items: ${(props) => props.alignItems};
   background-color: ${(props) => props.bgGray && "#80808035"};
   width: ${(props) => props.width};
-  height: ${(props) => props.height + "px"};
+  height: ${(props) =>
+    props.height === "100vh" ? props.height : props.height + "px"};
   border-radius: ${(props) => props.borderRadius + "px"};
   ${(props) =>
     props.px &&
