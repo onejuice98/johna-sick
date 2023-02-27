@@ -19,6 +19,7 @@ const TextStyle = styled.span<TextStyleType>`
   font-weight: ${(props) => props.weight};
   color: ${(props) => props.color};
   margin-right: ${(props) => props.mr + "px"};
+  font-family: sans-serif;
 `;
 const Texts = ({ children, fontSize, color, weight, mr }: TextStyleType) => {
   return (
