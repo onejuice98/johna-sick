@@ -8,7 +8,7 @@ const nextConfig = {
     return [
       {
         source: "/api/predict/:path*",
-        destination: `http://127.0.0.1:5000/predict/:path*`,
+        destination: `http://api.language-purifier.link:5000/predict/:path*`,
       },
     ];
   },

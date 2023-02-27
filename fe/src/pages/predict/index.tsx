@@ -1,9 +1,11 @@
 import Wrapper, { WrapperStyle } from "@/components/common/FlexWrapper";
 import Texts from "@/components/common/Texts";
+import CommentInput from "@/components/predict/svgs/CommentInput";
 import DisLike from "@/components/predict/svgs/DisLike";
 import Display from "@/components/predict/svgs/Display";
 import Like from "@/components/predict/svgs/Like";
 import NextPlay from "@/components/predict/svgs/NextPlay";
+import NoAvatar from "@/components/predict/svgs/NoAvatar";
 import Play from "@/components/predict/svgs/Play";
 import Share from "@/components/predict/svgs/Share";
 import ThreeDot from "@/components/predict/svgs/ThreeDot";
@@ -34,43 +36,13 @@ const VisibleButton = styled.button`
     transition-duration: 500ms;
   }
 `;
-const Avatar = styled.div`
-  border-radius: 100%;
-  width: 40px;
-  height: 40px;
-  background-color: gray;
-`;
-const CommentForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.5rem;
-  width: 90%;
-`;
-const CommentInput = styled.input`
-  border: none;
-  border-bottom: 1px solid gray;
-  padding-bottom: 4px;
-  width: 100%;
-  &:focus {
-    outline: none;
-  }
-`;
-const SubmitButton = styled.button`
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
-  &:hover {
-    background-color: #cecdcd;
-    transition-duration: 500ms;
-  }
-`;
+
 const CommentText = styled.p`
-  font-size: small;
+  font-size: medium;
   margin-top: 12px;
 `;
 
-const CENSOR_MESSAGE = "^^ld가 작동하였습니다.";
+const CENSOR_MESSAGE = "🤖 랭푸파가 작동되었습니다. 🤖";
 type censorListType = {
   comment: string;
   censor: boolean;
@@ -85,12 +57,11 @@ const Predict = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const tempPredict = await getPredict(comment);
     setComments([
       ...comments,
       {
         comment: comment,
-        censor: parseInt(tempPredict.predict) < -60 ? true : false,
+        censor: (await getPredict(comment)) < -60 ? true : false,
       },
     ]);
     setComment("");
@@ -121,14 +92,14 @@ const Predict = () => {
       </Wrapper>
       <Wrapper direction="column" mt={10}>
         <Texts fontSize="x-large" weight="bold">
-          Language-Purifier 를 소개합니다!
+          랭푸파를 소개합니다!
         </Texts>
         <Wrapper justifyContent="space-between" mt={10}>
           <Wrapper gap={1}>
-            <Avatar />
+            <NoAvatar w={40} h={40} />
             <Wrapper direction="column" gap={0.25}>
               <Texts fontSize="large" weight="bold">
-                One Juice
+                OneJuice
               </Texts>
               <Texts fontSize="small" weight={300} color="gray">
                 구독자 5명
@@ -156,7 +127,7 @@ const Predict = () => {
           </Texts>
           <VideoInfoParagraph>
             안녕하세요 🙌 <br />
-            Language-Purifier 제작자 OneJuice입니다. <br />
+            "랭푸파" 제작자 OneJuice입니다. <br />
             많이 부족한 프로그램이고, 완벽하진 않지만 욕은 확실하게 거른다구요!
             많이 사용해주세요!
           </VideoInfoParagraph>
@@ -172,27 +143,19 @@ const Predict = () => {
             {visible ? "나쁜 댓글 보기" : "나쁜 댓글 숨기기"}
           </VisibleButton>
         </div>
-        <Wrapper direction="row" gap={1}>
-          <Avatar />
-          <CommentForm onSubmit={handleSubmit}>
-            <CommentInput
-              type="text"
-              required
-              onChange={handleChange}
-              value={comment}
-              placeholder="댓글 추가..."
-            />
-            <SubmitButton type="submit"> 작성 </SubmitButton>
-          </CommentForm>
-        </Wrapper>
+        <CommentInput
+          submit={handleSubmit}
+          change={handleChange}
+          value={comment}
+        />
 
         <div>
           {comments.map((value, index) => (
             <Wrapper key={index} gap={1} mb={32}>
-              <Avatar />
+              <NoAvatar w={40} h={40} />
               <Wrapper direction="column" width="90%">
-                <Texts fontSize="small" weight="bold">
-                  One Juice
+                <Texts fontSize="medium" weight="bolder">
+                  OneJuice
                 </Texts>
                 <CommentText>
                   {visible && value.censor ? CENSOR_MESSAGE : value.comment}
