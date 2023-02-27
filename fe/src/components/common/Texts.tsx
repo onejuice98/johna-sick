@@ -7,6 +7,7 @@ interface TextStyleType {
   mr?: number; // px
   children?: React.ReactNode;
 }
+
 /**
  * @param fontSize font-size 조절(글자크기)
  * @param color font-color 설정
