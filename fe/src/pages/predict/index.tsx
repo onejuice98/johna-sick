@@ -127,7 +127,7 @@ const Predict = () => {
           </Texts>
           <VideoInfoParagraph>
             안녕하세요 🙌 <br />
-            "랭푸파" 제작자 OneJuice입니다. <br />
+            &quot;랭푸파&quot; 제작자 OneJuice입니다. <br />
             많이 부족한 프로그램이고, 완벽하진 않지만 욕은 확실하게 거른다구요!
             많이 사용해주세요!
           </VideoInfoParagraph>
