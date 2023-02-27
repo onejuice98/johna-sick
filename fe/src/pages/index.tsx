@@ -24,6 +24,7 @@ const ChromeDownload = styled.button`
 const ShowGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
+  width: 100%;
 `;
 
 const ChromeHref = styled.a`
@@ -62,11 +63,11 @@ export default function Main() {
               width="32px"
               height="32px"
             >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
               <g
                 id="SVGRepo_tracerCarrier"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               ></g>
               <g id="SVGRepo_iconCarrier">
                 <path
@@ -110,8 +111,8 @@ export default function Main() {
                     y2="20.9594"
                     gradientUnits="userSpaceOnUse"
                   >
-                    <stop stop-color="#86BBE5"></stop>
-                    <stop offset="1" stop-color="#1072BA"></stop>
+                    <stop stopColor="#86BBE5"></stop>
+                    <stop offset="1" stopColor="#1072BA"></stop>
                   </linearGradient>
                 </defs>
               </g>

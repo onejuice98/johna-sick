@@ -23,11 +23,11 @@ const renderPredictPage = () => {
 
   /* API 작동여부 테스트 */
   const F0CK_COMMENT = { value: "씨발" };
-  const CENSOR_MESSAGE = "^^ld가 작동하였습니다.";
+  const CENSOR_MESSAGE = "🤖 랭푸파가 작동되었습니다. 🤖";
 
   /* Component 에서 DOM 을 가져온다. */
-  const VideoTitle = () => result.getByText("Language-Purifier 를 소개합니다!");
-  const VideoMaker = () => result.getByText("One Juice");
+  const VideoTitle = () => result.getByText("랭푸파를 소개합니다!");
+  const VideoMaker = () => result.getByText("OneJuice");
   const SubscribeCounts = () => result.getByText("구독자 5명");
   const VideoDesc = () => result.getByText("조회수 12회");
   const CommentCounts = () => result.getByText("댓글 0개");
@@ -36,7 +36,7 @@ const renderPredictPage = () => {
   const CommentInput = () => result.getByPlaceholderText("댓글 추가...");
   const CommentSubmit = () => result.getByText("작성");
   const CommentTest = () => result.queryByText(MOCK_COMMENT.value);
-  const CommentAPITest = () => result.queryByText("^^ld가 작동하였습니다.");
+  const CommentAPITest = () => result.queryByText(CENSOR_MESSAGE);
 
   /* DOM 요소와 상호작용을 담당 */
   const clickBadDisplayButton = async () => {
