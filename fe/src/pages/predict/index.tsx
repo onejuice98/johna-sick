@@ -23,6 +23,7 @@ const VideoOptions = styled(WrapperStyle)`
 const VideoInfoParagraph = styled.p`
   font-size: small;
   line-height: 1rem;
+  font-family: sans-serif;
 `;
 const VisibleButton = styled.button`
   padding: 0.5rem;
@@ -40,6 +41,7 @@ const VisibleButton = styled.button`
 const CommentText = styled.p`
   font-size: medium;
   margin-top: 12px;
+  font-family: sans-serif;
 `;
 
 const CENSOR_MESSAGE = "🤖 랭푸파가 작동되었습니다. 🤖";
