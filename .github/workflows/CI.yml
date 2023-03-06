@@ -9,6 +9,8 @@ jobs:
   job-install:
     name: run test
     runs-on: ubuntu-latest
+    env:
+      working-directory: ./fe
 
     steps:
       - name: Checkout current commit (${{ github.sha }})
