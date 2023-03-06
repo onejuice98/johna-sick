@@ -28,6 +28,8 @@ jobs:
       - name: Install Dependencies
         if: steps.cache-dependencies.output.cache-hit != 'true'
         run: npm install
+        working-directory: ${{ env.working-directory }}
 
       - name: Run TEST
         run: npm run test:ci
+        working-directory: ${{ env.working-directory }}
