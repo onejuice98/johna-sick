@@ -13,6 +13,7 @@ jobs:
     steps:
       - name: Checkout current commit (${{ github.sha }})
         uses: actions/checkout@v3
+
         run: npm test:ci
         with:
           coverage-file: report.json
