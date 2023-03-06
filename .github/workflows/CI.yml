@@ -9,10 +9,27 @@ jobs:
   job-install:
     name: run test
     runs-on: ubuntu-latest
+    env:
+      working-directory: ./fe
 
     steps:
       - name: Checkout current commit (${{ github.sha }})
         uses: actions/checkout@v3
 
+      - name: Caching dependencies
+        id: cache-dependencies
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-build-
+            
+      - name: Install Dependencies
+        if: steps.cache-dependencies.output.cache-hit != 'true'
+        run: npm install
+        working-directory: ${{ env.working-directory }}
+
       - name: Run TEST
-        run: npm test:ci
+        run: npm run test:ci
+        working-directory: ${{ env.working-directory }}
