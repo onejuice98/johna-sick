@@ -26,7 +26,7 @@ const renderPredictPage = () => {
   const CENSOR_MESSAGE = "🤖 랭푸파가 작동되었습니다. 🤖";
 
   /* Component 에서 DOM 을 가져온다. */
-  const VideoTitle = () => result.getByText("일부러 테스트 틀리기");
+  const VideoTitle = () => result.getByText("일부러 테스트 틀리기2");
   const VideoMaker = () => result.getByText("OneJuice");
   const SubscribeCounts = () => result.getByText("구독자 5명");
   const VideoDesc = () => result.getByText("조회수 12회");
