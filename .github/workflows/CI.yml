@@ -16,6 +16,3 @@ jobs:
 
       - name: Run TEST
         run: npm test:ci
-        with:
-          coverage-file: report.json
-          base-coverage-file: report.json
