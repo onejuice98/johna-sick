@@ -1,5 +1,4 @@
 # 🤖 LngPuFi : 랭푸파
-🔗 Deploy [LngPuFi WebSite](https://www.language-purifier.link/) <br />
 🔗 Chrome webstore [LngPuFi Chrome extension](https://chrome.google.com/webstore/detail/lngpufi/hckbedefieglnkogmbfonpknnakaalnk)
 
 ## 📒 Description
